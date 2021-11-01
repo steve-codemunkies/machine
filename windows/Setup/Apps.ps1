@@ -45,6 +45,7 @@ choco upgrade --cache="$ChocoCachePath" --yes powershell-core
 choco upgrade --cache="$ChocoCachePath" --yes microsoft-windows-terminal
 choco upgrade --cache="$ChocoCachePath" --yes gsudo
 choco upgrade --cache="$ChocoCachePath" --yes jabra-direct
+choco upgrade --cache="$ChocoCachePath" --yes pokemon-tcg
 
 if(!$IsArm) {
     # x86/x64 only
