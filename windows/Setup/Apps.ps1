@@ -44,6 +44,7 @@ choco upgrade --cache="$ChocoCachePath" --yes chocolateygui
 choco upgrade --cache="$ChocoCachePath" --yes powershell-core
 choco upgrade --cache="$ChocoCachePath" --yes microsoft-windows-terminal
 choco upgrade --cache="$ChocoCachePath" --yes gsudo
+choco upgrade --cache="$ChocoCachePath" --yes jabra-direct
 
 if(!$IsArm) {
     # x86/x64 only
