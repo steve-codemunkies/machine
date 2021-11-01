@@ -46,6 +46,7 @@ choco upgrade --cache="$ChocoCachePath" --yes microsoft-windows-terminal
 choco upgrade --cache="$ChocoCachePath" --yes gsudo
 choco upgrade --cache="$ChocoCachePath" --yes jabra-direct
 choco upgrade --cache="$ChocoCachePath" --yes pokemon-tcg
+choco upgrade --cache="$ChocoCachePath" --yes microsoft-teams.install --params "'/AllUsers /NoAutoStart'"
 
 if(!$IsArm) {
     # x86/x64 only
