@@ -1,4 +1,4 @@
-# Patrik's configurations
+# Steve's configurations
 
 This repository contains my personal configurations for
 things like Windows, Linux, my terminals etc. I will 
