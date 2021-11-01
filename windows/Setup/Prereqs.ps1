@@ -50,9 +50,6 @@ if(!$IsArm) { # Can't install Windows Sandbox on ARM devices
 # Windows settings
 ##########################################################################
 
-Disable-BingSearch
-Disable-GameBarTips
-
 Set-ItemProperty -Path "HKLM:SYSTEM\CurrentControlSet\Control\FileSystem" -Name LongPathsEnabled -Type DWord -Value 1
 Set-WindowsExplorerOptions -EnableShowFileExtensions
 Set-TaskbarOptions -Size Large -Dock Bottom -Combine Full -Lock
@@ -82,7 +79,6 @@ Get-AppxPackage Microsoft.Microsoft3DViewer | Remove-AppxPackage
 Get-AppxPackage Microsoft.MixedReality.Portal | Remove-AppxPackage
 Get-AppxPackage Microsoft.ZuneMusic | Remove-AppxPackage
 Get-AppxPackage Microsoft.YourPhone | Remove-AppxPackage
-Get-AppxPackage Microsoft.MSPaint | Remove-AppxPackage
 Get-AppxPackage Microsoft.MicrosoftSolitaireCollection | Remove-AppxPackage
 
 ##########################################################################
@@ -110,9 +106,6 @@ Set-ItemProperty -Path HKLM:\Software\Microsoft\PolicyManager\default\WiFi\Allow
 
 # Change Explorer home screen back to "This PC"
 Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name LaunchTo -Type DWord -Value 1
-
-# Start Menu: Disable Bing Search Results
-Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search -Name BingSearchEnabled -Type DWord -Value 0
 
 # Turn off People in Taskbar
 If (-Not (Test-Path "HKCU:SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People")) {

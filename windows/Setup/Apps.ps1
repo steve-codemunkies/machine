@@ -34,46 +34,25 @@ New-Item -Path $ChocoCachePath -ItemType Directory -Force
 # Install applications
 ##########################################################################
 
-choco upgrade --cache="$ChocoCachePath" --yes discord
-choco upgrade --cache="$ChocoCachePath" --yes slack
 choco upgrade --cache="$ChocoCachePath" --yes microsoft-edge
 choco upgrade --cache="$ChocoCachePath" --yes git
-choco upgrade --cache="$ChocoCachePath" --yes ghostscript.app
 choco upgrade --cache="$ChocoCachePath" --yes 7zip.install
 choco upgrade --cache="$ChocoCachePath" --yes office365business
 choco upgrade --cache="$ChocoCachePath" --yes screentogif
 choco upgrade --cache="$ChocoCachePath" --yes paint.net
 choco upgrade --cache="$ChocoCachePath" --yes chocolateygui
 choco upgrade --cache="$ChocoCachePath" --yes powershell-core
-choco upgrade --cache="$ChocoCachePath" --yes ripgrep
 choco upgrade --cache="$ChocoCachePath" --yes microsoft-windows-terminal
-choco upgrade --cache="$ChocoCachePath" --yes winsnap
 choco upgrade --cache="$ChocoCachePath" --yes gsudo
 
 if(!$IsArm) {
     # x86/x64 only
-    choco upgrade --cache="$ChocoCachePath" --yes steam
-    choco upgrade --cache="$ChocoCachePath" --yes uplay
-    choco upgrade --cache="$ChocoCachePath" --yes spotify
-    choco upgrade --cache="$ChocoCachePath" --yes nugetpackageexplorer
     choco upgrade --cache="$ChocoCachePath" --yes docker-for-windows
-    choco upgrade --cache="$ChocoCachePath" --yes geforce-experience
     choco upgrade --cache="$ChocoCachePath" --yes sysinternals
-    choco upgrade --cache="$ChocoCachePath" --yes nodejs
-    choco upgrade --cache="$ChocoCachePath" --yes cmake
-    choco upgrade --cache="$ChocoCachePath" --yes curl
     choco upgrade --cache="$ChocoCachePath" --yes vscode
-    choco upgrade --cache="$ChocoCachePath" --yes visualstudio2019professional --package-parameters "--add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended --norestart --passive --locale en-US"
-    choco upgrade --cache="$ChocoCachePath" --yes dotpeek --pre
-    choco upgrade --cache="$ChocoCachePath" --yes zoom
     choco upgrade --cache="$ChocoCachePath" --yes poshgit
     choco upgrade --cache="$ChocoCachePath" --yes powertoys
-    choco upgrade --cache="$ChocoCachePath" --yes ncrunch-vs2019
-    choco upgrade --cache="$ChocoCachePath" --yes streamdeck
-    choco upgrade --cache="$ChocoCachePath" --yes epicgameslauncher
-    choco upgrade --cache="$ChocoCachePath" --yes playnite
     choco upgrade --cache="$ChocoCachePath" --yes sql-server-management-studio
-    choco upgrade --cache="$ChocoCachePath" --yes repoz
 }
 
 ##########################################################################
@@ -82,16 +61,16 @@ if(!$IsArm) {
 
 if(!$IsArm) {
     # x86/x64 only
-    code --install-extension cake-build.cake-vscode
-    code --install-extension matklad.rust-analyzer
-    code --install-extension ms-vscode.powershell
-    code --install-extension bungcip.better-toml
-    code --install-extension ms-azuretools.vscode-docker
-    code --install-extension octref.vetur
-    code --install-extension ms-vscode-remote.remote-wsl
-    code --install-extension jolaleye.horizon-theme-vscode
-    code --install-extension vscode-icons-team.vscode-icons
-    code --install-extension hediet.vscode-drawio
+    # code --install-extension cake-build.cake-vscode
+    # code --install-extension matklad.rust-analyzer
+    # code --install-extension ms-vscode.powershell
+    # code --install-extension bungcip.better-toml
+    # code --install-extension ms-azuretools.vscode-docker
+    # code --install-extension octref.vetur
+    # code --install-extension ms-vscode-remote.remote-wsl
+    # code --install-extension jolaleye.horizon-theme-vscode
+    # code --install-extension vscode-icons-team.vscode-icons
+    # code --install-extension hediet.vscode-drawio
 }
 
 ##########################################################################
@@ -147,24 +126,7 @@ Function Install-VSExtension([String] $PackageName)
 Write-Host "Installing Visual Studio extensions" -ForegroundColor Yellow
 Write-Host "NOTE: Script might appear unresponsive"
 
-Install-VSExtension -PackageName "MadsKristensen.Tweaks"
-
-##########################################################################
-# Install Rust
-##########################################################################
-
-if(!$IsArm) {
-    if (!(Test-Rust)) {
-        Write-Host "Installing Rust..."
-        $Client = New-Object System.Net.WebClient;
-        $Client.DownloadFile("https://win.rustup.rs/x86_64", "$HOME/Downloads/rustup-init.exe");
-        Start-Process -FilePath "$HOME/Downloads/rustup-init.exe" -NoNewWindow -Wait -ArgumentList "-y";
-        RefreshEnv
-    } else {
-        Write-Host "Updating Rust..."
-        rustup update
-    }
-}
+# Install-VSExtension -PackageName "MadsKristensen.Tweaks"
 
 ##########################################################################
 # Install posh-git

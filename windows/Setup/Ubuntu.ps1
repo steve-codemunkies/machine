@@ -21,14 +21,14 @@ if ($env:UserName -eq "WDAGUtilityAccount") {
 wsl --set-default-version 2
 
 # Install Ubuntu
-Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1804 -OutFile ~/Downloads/Ubuntu.appx -UseBasicParsing
+Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-2004 -OutFile ~/Downloads/Ubuntu.appx -UseBasicParsing
 Add-AppxPackage -Path ~/Downloads/Ubuntu.appx
 RefreshEnv
 
 # Update Ubuntu
-Ubuntu1804 install --root
-Ubuntu1804 run apt-get update -y
-Ubuntu1804 run apt-get upgrade -y
+Ubuntu2004 install --root
+Ubuntu2004 run apt-get update -y
+Ubuntu2004 run apt-get upgrade -y
 
 ##########################################################################
 # Restore Temporary Settings
