@@ -1,0 +1,16 @@
+code --install-extension amazonwebservices.aws-toolkit-vscode
+code --install-extension codezombiech.gitignore
+code --install-extension DavidAnson.vscode-markdownlint
+code --install-extension hbenl.vscode-test-explorer
+code --install-extension mhutchie.git-graph
+code --install-extension ms-azuretools.vscode-azurefunctions
+code --install-extension ms-azuretools.vscode-azureresourcegroups
+code --install-extension ms-azuretools.vscode-docker
+code --install-extension ms-dotnettools.csharp
+code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
+code --install-extension ms-vscode-remote.remote-containers
+code --install-extension ms-vscode-remote.remote-wsl
+code --install-extension ms-vscode.azure-account
+code --install-extension ms-vscode.hexeditor
+code --install-extension ms-vscode.test-adapter-converter
+code --install-extension redhat.vscode-yaml
