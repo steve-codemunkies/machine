@@ -14,3 +14,7 @@ code --install-extension ms-vscode.azure-account
 code --install-extension ms-vscode.hexeditor
 code --install-extension ms-vscode.test-adapter-converter
 code --install-extension redhat.vscode-yaml
+code --install-extension aws-scripting-guy.cform
+code --install-extension kddejong.vscode-cfn-lint
+code --install-extension Arjun.swagger-viewer
+code --install-extension rangav.vscode-thunder-client
