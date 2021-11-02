@@ -21,7 +21,7 @@ if ($env:UserName -eq "WDAGUtilityAccount") {
 wsl --set-default-version 2
 
 # Install Ubuntu
-Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-2004 -OutFile ~/Downloads/Ubuntu.appx -UseBasicParsing
+Invoke-WebRequest -Uri https://aka.ms/wslubuntu2004 -OutFile ~/Downloads/Ubuntu.appx -UseBasicParsing
 Add-AppxPackage -Path ~/Downloads/Ubuntu.appx
 RefreshEnv
 
