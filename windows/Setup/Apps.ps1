@@ -47,6 +47,7 @@ choco upgrade --cache="$ChocoCachePath" --yes gsudo
 choco upgrade --cache="$ChocoCachePath" --yes jabra-direct
 choco upgrade --cache="$ChocoCachePath" --yes logitech-options
 choco upgrade --cache="$ChocoCachePath" --yes microsoft-teams.install --params "'/AllUsers /NoAutoStart'"
+choco upgrade --cache="$ChocoCachePath" --yes kdiff3
 
 if(!$IsArm) {
     # x86/x64 only
