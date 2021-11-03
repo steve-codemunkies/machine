@@ -58,8 +58,13 @@ Set-TaskbarOptions -Size Large -Dock Bottom -Combine Full -Lock
 # Power settings
 ##########################################################################
 
-powercfg /change monitor-timeout-ac 0 # Don't turn off monitor
-powercfg /change standby-timeout-ac 0 # Don't ever sleep
+powercfg /change monitor-timeout-ac 0               # Don't turn off monitor
+powercfg /change standby-timeout-ac 0               # Don't ever sleep
+powercfg /hibernate on                              # Enable hibernate
+powercfg /hibernate /type full                      # Use full hibernation
+
+# Display the hibernate option in the powermenu flyout
+Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings -Name ShowHibernateOption -Value 1
 
 ##########################################################################
 # Uninstall bloatware
