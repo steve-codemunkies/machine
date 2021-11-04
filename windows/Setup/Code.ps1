@@ -19,3 +19,4 @@ code --install-extension kddejong.vscode-cfn-lint
 code --install-extension Arjun.swagger-viewer
 code --install-extension rangav.vscode-thunder-client
 code --install-extension ms-vscode.powershell
+code --install-extension eamodio.gitlens
