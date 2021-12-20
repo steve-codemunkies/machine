@@ -1,20 +1,20 @@
 Param (
-    [Parameter(ParameterSetName="Enable")]
-    [switch]$Enable
+    [Parameter(ParameterSetName="Disable")]
+    [switch]$Disable
 )
 
-$enablingUaCAndUpdates = $false
+$disablingUaCAndUpdates = $false
 
-if ($Enable.IsPresent) {
-    $enablingUaCAndUpdates = $true
+if ($Disable.IsPresent) {
+    $disablingUaCAndUpdates = $true
 }
 
-if ($enablingUaCAndUpdates) {
-    Enable-UAC
-    Enable-MicrosoftUpdate
-} else {
+if ($disablingUaCAndUpdates) {
     Disable-MicrosoftUpdate
     Disable-UAC
+} else {
+    Enable-UAC
+    Enable-MicrosoftUpdate
 }
 
 Restart-Computer -Confirm
