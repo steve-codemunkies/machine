@@ -1,5 +1,7 @@
 [CmdletBinding(DefaultParameterSetName='Prereqs')]
 Param(
+    [Parameter(ParameterSetName='DisableUac')]
+    [switch]$DisableUac,
     [Parameter(ParameterSetName='Prereqs')]
     [switch]$Prereqs,
     [Parameter(ParameterSetName='Software')]
@@ -7,7 +9,9 @@ Param(
     [Parameter(ParameterSetName='Software')]
     [switch]$Apps,
     [Parameter(ParameterSetName='Software')]
-    [switch]$VisualStudioExtensions
+    [switch]$VisualStudioExtensions,
+    [Parameter(ParameterSetName='EnableUac')]
+    [switch]$EnableUac
 )
 
 # Nothing selected? Show help screen.
@@ -30,6 +34,9 @@ if (!(Assert-CommandExists -CommandName "Install-BoxstarterPackage")) {
     Get-Boxstarter -Force
 }
 
+if ($DisableUac.IsPresent) {
+    ./Setup/UacAndUpdates.ps1 -Disable
+}
 if ($Prereqs.IsPresent) {
     Install-BoxstarterPackage ./Setup/Prereqs.ps1 -DisableReboots
     RefreshEnv
@@ -45,4 +52,7 @@ if ($VisualStudioExtensions.IsPresent) {
 if ($Ubuntu.IsPresent) {
     Install-BoxstarterPackage ./Setup/Ubuntu.ps1 -DisableReboots
     RefreshEnv
+}
+if ($EnableUac.IsPresent) {
+    ./Setup/UacAndUpdates.ps1 
 }
