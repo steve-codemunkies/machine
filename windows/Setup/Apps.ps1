@@ -1,21 +1,4 @@
 ##########################################################################
-# Utility stuff
-##########################################################################
-
-Function Test-Rust() {
-    return Test-Path -Path (Join-Path $env:USERPROFILE ".cargo");
-}
-
-$Architecture = (Get-WmiObject Win32_OperatingSystem).OSArchitecture;
-$IsArm = $false;
-if($Architecture.StartsWith("ARM")) {
-    Write-Host "##########################################################################"
-    Write-Host "# RUNNING ON ARM COMPUTER"
-    Write-Host "##########################################################################"
-    $IsArm = $true;
-}
-
-##########################################################################
 # Create temporary directory
 ##########################################################################
 
@@ -40,94 +23,12 @@ choco upgrade --cache="$ChocoCachePath" --yes microsoft-windows-terminal
 choco upgrade --cache="$ChocoCachePath" --yes gsudo
 choco upgrade --cache="$ChocoCachePath" --yes jabra-direct
 choco upgrade --cache="$ChocoCachePath" --yes logitech-options
-choco upgrade --cache="$ChocoCachePath" --yes microsoft-teams.install --params "'/AllUsers /NoAutoStart'"
 choco upgrade --cache="$ChocoCachePath" --yes kdiff3
-choco upgrade --cache="$ChocoCachePath" --yes openvpn
-choco upgrade --cache="$ChocoCachePath" --yes dbeaver       # Access to MySql/MariaDb
-
-
-if(!$IsArm) {
-    # x86/x64 only
-    choco upgrade --cache="$ChocoCachePath" --yes docker-for-windows
-    choco upgrade --cache="$ChocoCachePath" --yes sysinternals
-    choco upgrade --cache="$ChocoCachePath" --yes vscode
-    choco upgrade --cache="$ChocoCachePath" --yes poshgit
-    choco upgrade --cache="$ChocoCachePath" --yes powertoys
-    choco upgrade --cache="$ChocoCachePath" --yes sql-server-management-studio
-}
-
-##########################################################################
-# Install VSCode extensions
-##########################################################################
-
-if(!$IsArm) {
-    # x86/x64 only
-    # code --install-extension cake-build.cake-vscode
-    # code --install-extension matklad.rust-analyzer
-    # code --install-extension ms-vscode.powershell
-    # code --install-extension bungcip.better-toml
-    # code --install-extension ms-azuretools.vscode-docker
-    # code --install-extension octref.vetur
-    # code --install-extension ms-vscode-remote.remote-wsl
-    # code --install-extension jolaleye.horizon-theme-vscode
-    # code --install-extension vscode-icons-team.vscode-icons
-    # code --install-extension hediet.vscode-drawio
-}
-
-##########################################################################
-# Install VSCode extensions
-##########################################################################
-
-Function Install-VSExtension([String] $PackageName) 
-{
-    # Based on https://gist.github.com/ScottHutchinson/b22339c3d3688da5c9b477281e258400
-    $Uri = "https://marketplace.visualstudio.com/items?itemName=$($PackageName)"
-    $VsixLocation = "$($env:Temp)\$([guid]::NewGuid()).vsix"   
-    $VSInstallDir = "C:\Program Files (x86)\Microsoft Visual Studio\Installer\resources\app\ServiceHub\Services\Microsoft.VisualStudio.Setup.Service"
-
-    if (-Not $VSInstallDir) {
-        Write-Error "Visual Studio InstallDir registry key missing" -ForegroundColor Red
-        Exit 1
-    }
-    
-    Write-Host "Grabbing VSIX extension at $($Uri)"
-    $HTML = Invoke-WebRequest -Uri $Uri -UseBasicParsing -SessionVariable session
-    
-    Write-Debug "Attempting to download $($PackageName)..."
-    $anchor = $HTML.Links |
-    Where-Object { $_.class -eq 'install-button-container' } |
-    Select-Object -ExpandProperty href
-
-    if (-Not $anchor) {
-        Write-Error "Could not find download anchor tag on the Visual Studio Extensions page" -ForegroundColor Red
-        Exit 1
-    }
-
-    $href = "https://marketplace.visualstudio.com$($anchor)"
-    Write-Debug "Anchor is $($anchor)"
-    Write-Debug "Href is $($href)"
-    
-    Invoke-WebRequest $href -OutFile $VsixLocation -WebSession $session
-    if (-Not (Test-Path $VsixLocation)) {
-        Write-Error "Downloaded VSIX file could not be located" -ForegroundColor Red
-        Exit 1
-    }
-
-    Write-Debug "VSInstallDir is $($VSInstallDir)"
-    Write-Debug "VsixLocation is $($VsixLocation)"
-    Write-Host "Installing $($PackageName)..."
-    Start-Process -Filepath "$($VSInstallDir)\VSIXInstaller" -ArgumentList "/q /a $($VsixLocation)" -Wait
-    
-    Write-Debug "Cleanup..."
-    Remove-Item $VsixLocation
-    
-    Write-Host "Installation of $($PackageName) complete!" -ForegroundColor Green
-}
-
-Write-Host "Installing Visual Studio extensions" -ForegroundColor Yellow
-Write-Host "NOTE: Script might appear unresponsive"
-
-# Install-VSExtension -PackageName "MadsKristensen.Tweaks"
+choco upgrade --cache="$ChocoCachePath" --yes docker-for-windows
+choco upgrade --cache="$ChocoCachePath" --yes sysinternals
+choco upgrade --cache="$ChocoCachePath" --yes vscode
+choco upgrade --cache="$ChocoCachePath" --yes poshgit
+choco upgrade --cache="$ChocoCachePath" --yes powertoys
 
 ##########################################################################
 # Install posh-git
