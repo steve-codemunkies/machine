@@ -16,7 +16,8 @@ Param(
 
 # Nothing selected? Show help screen.
 if (!$Prereqs.IsPresent -and !$Ubuntu.IsPresent -and !$Apps.IsPresent `
-    -and !$VisualStudioExtensions.IsPresent)
+    -and !$VisualStudioExtensions.IsPresent -and !$DisableUac.IsPresent `
+    -and !$EnableUac.IsPresent)
 {
     Get-Help .\Install.ps1
     Exit;
