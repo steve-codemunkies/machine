@@ -1,6 +1,6 @@
 [CmdletBinding(DefaultParameterSetName='Prereqs')]
 Param(
-    [Parameter(ParameterSetName='DisableUac')]
+    [Parameter(ParameterSetName='Uac')]
     [switch]$DisableUac,
     [Parameter(ParameterSetName='Prereqs')]
     [switch]$Prereqs,
@@ -9,14 +9,14 @@ Param(
     [Parameter(ParameterSetName='Software')]
     [switch]$Apps,
     [Parameter(ParameterSetName='Software')]
-    [switch]$VisualStudioExtensions,
-    [Parameter(ParameterSetName='EnableUac')]
+    [switch]$VSCodeExtensions,
+    [Parameter(ParameterSetName='Uac')]
     [switch]$EnableUac
 )
 
 # Nothing selected? Show help screen.
 if (!$Prereqs.IsPresent -and !$Ubuntu.IsPresent -and !$Apps.IsPresent `
-    -and !$VisualStudioExtensions.IsPresent -and !$DisableUac.IsPresent `
+    -and !$VSCodeExtensions.IsPresent -and !$DisableUac.IsPresent `
     -and !$EnableUac.IsPresent)
 {
     Get-Help .\Install.ps1
@@ -46,8 +46,8 @@ if ($Apps.IsPresent) {
     Install-BoxstarterPackage ./Setup/Apps.ps1 -DisableReboots
     RefreshEnv
 }
-if ($VisualStudioExtensions.IsPresent) {
-    Install-BoxstarterPackage ./Setup/VS-Extensions.ps1 -DisableReboots
+if ($VSCodeExtensions.IsPresent) {
+    Install-BoxstarterPackage ./Setup/Code.ps1 -DisableReboots
     RefreshEnv
 }
 if ($Ubuntu.IsPresent) {
