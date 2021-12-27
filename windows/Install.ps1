@@ -1,5 +1,7 @@
 [CmdletBinding(DefaultParameterSetName='Prereqs')]
 Param(
+    [Parameter(ParameterSetName='Uac')]
+    [switch]$DisableUac,
     [Parameter(ParameterSetName='Prereqs')]
     [switch]$Prereqs,
     [Parameter(ParameterSetName='Software')]
@@ -7,12 +9,15 @@ Param(
     [Parameter(ParameterSetName='Software')]
     [switch]$Apps,
     [Parameter(ParameterSetName='Software')]
-    [switch]$VisualStudioExtensions
+    [switch]$VSCodeExtensions,
+    [Parameter(ParameterSetName='Uac')]
+    [switch]$EnableUac
 )
 
 # Nothing selected? Show help screen.
 if (!$Prereqs.IsPresent -and !$Ubuntu.IsPresent -and !$Apps.IsPresent `
-    -and !$VisualStudioExtensions.IsPresent)
+    -and !$VSCodeExtensions.IsPresent -and !$DisableUac.IsPresent `
+    -and !$EnableUac.IsPresent)
 {
     Get-Help .\Install.ps1
     Exit;
@@ -30,6 +35,9 @@ if (!(Assert-CommandExists -CommandName "Install-BoxstarterPackage")) {
     Get-Boxstarter -Force
 }
 
+if ($DisableUac.IsPresent) {
+    ./Setup/UacAndUpdates.ps1 -Disable
+}
 if ($Prereqs.IsPresent) {
     Install-BoxstarterPackage ./Setup/Prereqs.ps1 -DisableReboots
     RefreshEnv
@@ -38,11 +46,14 @@ if ($Apps.IsPresent) {
     Install-BoxstarterPackage ./Setup/Apps.ps1 -DisableReboots
     RefreshEnv
 }
-if ($VisualStudioExtensions.IsPresent) {
-    Install-BoxstarterPackage ./Setup/VS-Extensions.ps1 -DisableReboots
+if ($VSCodeExtensions.IsPresent) {
+    Install-BoxstarterPackage ./Setup/Code.ps1 -DisableReboots
     RefreshEnv
 }
 if ($Ubuntu.IsPresent) {
     Install-BoxstarterPackage ./Setup/Ubuntu.ps1 -DisableReboots
     RefreshEnv
+}
+if ($EnableUac.IsPresent) {
+    ./Setup/UacAndUpdates.ps1 
 }

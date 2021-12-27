@@ -1,10 +1,4 @@
 ##########################################################################
-# Disable UAC (temporarily)
-##########################################################################
-
-Disable-UAC
-
-##########################################################################
 # Utility stuff
 ##########################################################################
 
@@ -58,8 +52,13 @@ Set-TaskbarOptions -Size Large -Dock Bottom -Combine Full -Lock
 # Power settings
 ##########################################################################
 
-powercfg /change monitor-timeout-ac 0 # Don't turn off monitor
-powercfg /change standby-timeout-ac 0 # Don't ever sleep
+powercfg /change monitor-timeout-ac 0               # Don't turn off monitor
+powercfg /change standby-timeout-ac 0               # Don't ever sleep
+powercfg /hibernate on                              # Enable hibernate
+powercfg /hibernate /type full                      # Use full hibernation
+
+# Display the hibernate option in the powermenu flyout
+Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings -Name ShowHibernateOption -Value 1
 
 ##########################################################################
 # Uninstall bloatware
@@ -109,6 +108,8 @@ Set-ItemProperty -Path HKLM:\Software\Microsoft\PolicyManager\default\WiFi\Allow
 
 # Change Explorer home screen back to "This PC"
 Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name LaunchTo -Type DWord -Value 1
+# Don't display checkboxes in windows (file) explorer
+Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name AutoCheckSelect -Type DWord -Value 0
 
 # Turn off People in Taskbar
 If (-Not (Test-Path "HKCU:SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People")) {
@@ -121,10 +122,3 @@ If (-Not (Test-Path HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization)) 
 	New-Item -Path HKLM:\SOFTWARE\Policies\Microsoft\Windows -Name Personalization | Out-Null
 }
 Set-ItemProperty -Path HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization -Name NoLockScreen -Type DWord -Value 1
-
-##########################################################################
-# Restore Temporary Settings
-##########################################################################
-
-Enable-UAC
-Enable-MicrosoftUpdate
