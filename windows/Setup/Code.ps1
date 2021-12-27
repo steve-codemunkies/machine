@@ -8,8 +8,7 @@ code --install-extension ms-azuretools.vscode-azureresourcegroups
 code --install-extension ms-azuretools.vscode-docker
 code --install-extension ms-dotnettools.csharp
 code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
-code --install-extension ms-vscode-remote.remote-containers
-code --install-extension ms-vscode-remote.remote-wsl
+code --install-extension ms-vscode-remote.vscode-remote-extensionpack
 code --install-extension ms-vscode.azure-account
 code --install-extension ms-vscode.hexeditor
 code --install-extension ms-vscode.test-adapter-converter
