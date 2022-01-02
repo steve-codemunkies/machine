@@ -21,3 +21,4 @@ code --install-extension ms-vscode.powershell
 code --install-extension eamodio.gitlens
 code --install-extension editorconfig.editorconfig
 code --install-extension Orta.vscode-jest
+code --install-extension 42Crunch.vscode-openapi
